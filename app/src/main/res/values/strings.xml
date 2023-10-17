@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">StoryApp</string>
+    <!-- Toolbar Titles -->
+    <string name="add_story">Add Story</string>
+    <string name="camera">Camera</string>
+    <string name="detail">Detail</string>
+    <string name="maps">Maps</string>
 </resources>

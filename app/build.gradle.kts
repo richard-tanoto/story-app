@@ -56,4 +56,7 @@ dependencies {
 
     implementation(libs.dagger.hilt.core)
     ksp(libs.dagger.hilt.compiler)
+
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
 }

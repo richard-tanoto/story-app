@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.StoryApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
@@ -31,11 +31,5 @@
 
         <item name="android:statusBarColor">@color/md_theme_dark_background</item>
         <item name="android:windowLightStatusBar">false</item>
-    </style>
-
-    <style name="Theme.StoryApp.SplashScreen" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/md_theme_dark_primary</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
-        <item name="postSplashScreenTheme">@style/Theme.StoryApp</item>
     </style>
 </resources>

@@ -5,6 +5,7 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+@Suppress("UnstableApiUsage")
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -28,6 +29,10 @@ dependencyResolutionManagement {
             // Dagger Hilt
             library("dagger-hilt-core","com.google.dagger:hilt-android:2.48")
             library("dagger-hilt-compiler","com.google.dagger:hilt-android-compiler:2.48")
+
+            // Navigation
+            library("navigation-fragment", "androidx.navigation:navigation-fragment-ktx:2.7.4")
+            library("navigation-ui", "androidx.navigation:navigation-ui-ktx:2.7.4")
         }
     }
 }
