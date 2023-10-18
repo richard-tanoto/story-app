@@ -33,6 +33,18 @@ dependencyResolutionManagement {
             // Navigation
             library("navigation-fragment", "androidx.navigation:navigation-fragment-ktx:2.7.4")
             library("navigation-ui", "androidx.navigation:navigation-ui-ktx:2.7.4")
+
+            // Retrofit and Okhttp
+            library("retrofit2-retrofit", "com.squareup.retrofit2:retrofit:2.9.0")
+            library("retrofit2-converter-gson", "com.squareup.retrofit2:converter-gson:2.9.0")
+            library("okhttp3-logging-interceptor", "com.squareup.okhttp3:logging-interceptor:4.9.0")
+
+            // ViewModel and LiveData Lifecycle
+            library("lifecycle-viewmodel","androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+            library("lifecycle-livedata","androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
+
+            // Lottie
+            library("lottie-animation", "com.airbnb.android:lottie:3.4.0")
         }
     }
 }

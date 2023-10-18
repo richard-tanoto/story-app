@@ -5,4 +5,19 @@
     <string name="camera">Camera</string>
     <string name="detail">Detail</string>
     <string name="maps">Maps</string>
+
+    <string name="login">Login</string>
+    <string name="dont_have_account">Don\'t have account?</string>
+    <string name="sign_up">Sign up</string>
+    <string name="sign_in">Sign in</string>
+
+    <string name="name">Name</string>
+    <string name="email">Email address</string>
+    <string name="password">Password</string>
+
+    <string name="email_warning_invalid">Invalid email address</string>
+    <string name="email_warning_empty">Please insert your email address</string>
+    <string name="password_warning_empty">Please insert your password</string>
+    <string name="password_warning_length">Please enter password at least 6 characters</string>
+
 </resources>
