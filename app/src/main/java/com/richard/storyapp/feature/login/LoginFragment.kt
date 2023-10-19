@@ -58,8 +58,7 @@ class LoginFragment : BaseFragment() {
             when (response) {
                 is ApiResult.Success -> {
                     showLoading(false)
-                    showToast(response.data.loginResult.token)
-                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
+                    viewModel.setToken(response.data.loginResult.token)
                 }
 
                 is ApiResult.Loading -> {

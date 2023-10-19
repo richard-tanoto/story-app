@@ -68,4 +68,17 @@ dependencies {
     implementation(libs.lifecycle.livedata)
 
     implementation(libs.lottie.animation)
+
+    implementation(libs.paging3.runtime)
+    testImplementation(libs.paging3.common)
+
+    implementation(libs.room.runtime)
+    ksp(libs.room.compiler)
+    implementation(libs.room.ktx)
+    implementation(libs.room.paging)
+
+    implementation(libs.datastore)
+
+    implementation(libs.glide.core)
+    ksp(libs.glide.ksp)
 }

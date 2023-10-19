@@ -57,6 +57,13 @@
         <item name="android:padding">0dp</item>
     </style>
 
+    <style name="Image"/>
+
+    <style name="Image.Rounded">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
     <!--<style name="Text" />
 
     <style name="Text.Option">

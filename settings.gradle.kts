@@ -45,6 +45,23 @@ dependencyResolutionManagement {
 
             // Lottie
             library("lottie-animation", "com.airbnb.android:lottie:3.4.0")
+
+            // Paging 3
+            library("paging3-runtime","androidx.paging:paging-runtime:3.2.1")
+            library("paging3-common","androidx.paging:paging-common:3.2.1")
+
+            // Room
+            library("room-runtime","androidx.room:room-runtime:2.5.2")
+            library("room-compiler","androidx.room:room-compiler:2.5.2")
+            library("room-ktx","androidx.room:room-ktx:2.5.2")
+            library("room-paging","androidx.room:room-paging:2.5.2")
+
+            // Datastore
+            library("datastore", "androidx.datastore:datastore-preferences:1.0.0")
+
+            // Glide
+            library("glide-core", "com.github.bumptech.glide:glide:4.16.0")
+            library("glide-ksp", "com.github.bumptech.glide:ksp:4.16.0")
         }
     }
 }

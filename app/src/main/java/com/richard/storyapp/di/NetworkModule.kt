@@ -1,7 +1,9 @@
 package com.richard.storyapp.di
 
 import com.richard.storyapp.BuildConfig
+import com.richard.storyapp.core.data.local.preference.PreferencesManager
 import com.richard.storyapp.core.data.remote.api.ApiService
+import com.richard.storyapp.core.data.remote.api.TokenInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,12 +21,17 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient {
+    fun provideTokenInterceptor(preferencesManager: PreferencesManager): TokenInterceptor = TokenInterceptor(preferencesManager)
+
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(tokenInterceptor: TokenInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(
                 if (BuildConfig.DEBUG) HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
                 else HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE)
             )
+            .addInterceptor(tokenInterceptor)
             .connectTimeout(10, TimeUnit.SECONDS)
             .readTimeout(10, TimeUnit.SECONDS)
             .build()
