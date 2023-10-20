@@ -64,6 +64,13 @@
         <item name="cornerSize">16dp</item>
     </style>
 
+    <style name="Image.Outline"/>
+
+    <style name="Image.Outline.Rounded">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">17dp</item>
+    </style>
+
     <!--<style name="Text" />
 
     <style name="Text.Option">

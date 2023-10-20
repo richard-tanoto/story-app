@@ -16,7 +16,7 @@ class StoryAdapter : PagingDataAdapter<Story, StoryAdapter.ViewHolder>(DIFF_CALL
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data = getItem(position)
         if (data != null) {
-            holder.binding.ivStoryPhoto.transitionName = data.id
+            holder.binding.imgStory.transitionName = data.id
             holder.bind(data)
             holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(data, holder) }
         }
@@ -41,9 +41,9 @@ class StoryAdapter : PagingDataAdapter<Story, StoryAdapter.ViewHolder>(DIFF_CALL
             data.apply {
                 Glide.with(itemView.context)
                     .load(photoUrl)
-                    .into(binding.ivStoryPhoto)
-                binding.tvStoryName.text = name
-                binding.tvStoryDescription.text = description
+                    .into(binding.imgStory)
+                binding.tvName.text = name
+                binding.tvDescription.text = description
             }
         }
     }

@@ -68,7 +68,7 @@ class HomeFragment : BaseFragment() {
         storyAdapter.setOnItemClickCallback(object : StoryAdapter.OnItemClickCallback {
             override fun onItemClicked(data: Story, viewHolder: StoryAdapter.ViewHolder) {
                 val extras = FragmentNavigatorExtras(
-                    viewHolder.binding.ivStoryPhoto to "photoTransition"
+                    viewHolder.binding.imgStory to "photoTransition"
                 )
                 findNavController().navigate(
                     HomeFragmentDirections.actionHomeFragmentToDetailFragment(),
