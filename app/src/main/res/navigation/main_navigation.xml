@@ -50,7 +50,11 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.richard.storyapp.feature.detail.DetailFragment"
-        android:label="DetailFragment" />
+        android:label="DetailFragment" >
+        <argument
+            android:name="id"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/cameraFragment"
         android:name="com.richard.storyapp.feature.camera.CameraFragment"

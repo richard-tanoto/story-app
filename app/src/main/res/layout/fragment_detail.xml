@@ -16,4 +16,105 @@
         app:titleTextAppearance="@style/ToolbarTitle"
         tools:title="@string/app_name" />
 
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:maxLines="1"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:transitionName="nameTransition"
+        app:layout_constraintBottom_toTopOf="@id/tvDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="@string/name" />
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textSize="16sp"
+        android:transitionName="descriptionTransition"
+        app:layout_constraintBottom_toTopOf="@id/imgStory"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvName"
+        tools:text="Description" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imgBorder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/bg_image_rounded"
+        android:contentDescription="Background Image"
+        android:scaleType="fitCenter"
+        android:transitionName="borderTransition"
+        app:layout_constraintBottom_toBottomOf="@id/imgStory"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toEndOf="@id/imgStory"
+        app:layout_constraintHeight="match_constraint"
+        app:layout_constraintStart_toStartOf="@id/imgStory"
+        app:layout_constraintTop_toTopOf="@id/imgStory"
+        app:shapeAppearanceOverlay="@style/Image.Outline.Rounded" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imgStory"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="Story Image"
+        android:padding="1dp"
+        android:transitionName="photoTransition"
+        app:layout_constraintBottom_toTopOf="@id/tvDate"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight="match_constraint"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDescription"
+        app:shapeAppearanceOverlay="@style/Image.Rounded"
+        tools:src="@color/md_theme_light_primary" />
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textAlignment="textEnd"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgStory"
+        tools:text="Oct 22, 2023" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

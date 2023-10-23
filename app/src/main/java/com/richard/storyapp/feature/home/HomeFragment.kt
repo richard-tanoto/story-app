@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
@@ -41,6 +42,8 @@ class HomeFragment : BaseFragment() {
         setupRecyclerView()
         setupObserver()
         setEventClickListener()
+
+        view.doOnPreDraw { startPostponedEnterTransition() }
     }
 
     private fun setupToolbar() {
@@ -68,14 +71,23 @@ class HomeFragment : BaseFragment() {
         storyAdapter.setOnItemClickCallback(object : StoryAdapter.OnItemClickCallback {
             override fun onItemClicked(data: Story, viewHolder: StoryAdapter.ViewHolder) {
                 val extras = FragmentNavigatorExtras(
+                    viewHolder.binding.tvName to "nameTransition",
+                    viewHolder.binding.tvDescription to "descriptionTransition",
+                    viewHolder.binding.imgBorder to "borderTransition",
                     viewHolder.binding.imgStory to "photoTransition"
                 )
                 findNavController().navigate(
-                    HomeFragmentDirections.actionHomeFragmentToDetailFragment(),
+                    HomeFragmentDirections.actionHomeFragmentToDetailFragment(data.id),
                     extras
                 )
             }
         })
+
+        binding.rvStory.viewTreeObserver
+            .addOnPreDrawListener {
+                startPostponedEnterTransition()
+                true
+            }
     }
 
     private fun setupObserver() {
