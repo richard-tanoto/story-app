@@ -24,6 +24,12 @@ class PreferencesManager @Inject constructor(
         }
     }
 
+    suspend fun clearSession() {
+        dataStore.edit { preferences ->
+            preferences.clear()
+        }
+    }
+
     companion object {
         private val TOKEN_KEY = stringPreferencesKey("token_key")
     }

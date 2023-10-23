@@ -19,5 +19,6 @@
     <string name="email_warning_empty">Please insert your email address</string>
     <string name="password_warning_empty">Please insert your password</string>
     <string name="password_warning_length">Please enter password at least 6 characters</string>
+    <string name="logout">Logout</string>
 
 </resources>
