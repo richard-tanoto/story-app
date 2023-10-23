@@ -81,4 +81,8 @@ dependencies {
 
     implementation(libs.glide.core)
     ksp(libs.glide.ksp)
+
+    implementation(libs.camerax)
+    implementation(libs.camerax.lifecycle)
+    implementation(libs.camerax.view)
 }

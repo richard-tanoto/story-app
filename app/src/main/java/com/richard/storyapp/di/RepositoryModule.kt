@@ -33,7 +33,8 @@ class RepositoryModule {
     @Singleton
     fun provideStoryRepository(
         remoteMediator: StoryRemoteMediator,
-        database: StoryDatabase
-    ): StoryRepository = StoryRepository(remoteMediator, database)
+        database: StoryDatabase,
+        apiService: ApiService
+    ): StoryRepository = StoryRepository(remoteMediator, database, apiService)
 
 }

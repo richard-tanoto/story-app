@@ -62,6 +62,11 @@ dependencyResolutionManagement {
             // Glide
             library("glide-core", "com.github.bumptech.glide:glide:4.16.0")
             library("glide-ksp", "com.github.bumptech.glide:ksp:4.16.0")
+
+            // CameraX
+            library("camerax", "androidx.camera:camera-camera2:1.3.0")
+            library("camerax-lifecycle", "androidx.camera:camera-lifecycle:1.3.0")
+            library("camerax-view", "androidx.camera:camera-view:1.3.0")
         }
     }
 }

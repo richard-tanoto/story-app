@@ -1,19 +1,15 @@
 package com.richard.storyapp.feature.login
 
-import android.app.Dialog
 import android.os.Bundle
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.richard.storyapp.R
 import com.richard.storyapp.core.data.remote.response.ApiResult
 import com.richard.storyapp.core.ui.BaseFragment
 import com.richard.storyapp.databinding.FragmentLoginBinding
-import com.richard.storyapp.databinding.LayoutLoadingBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,7 +17,6 @@ class LoginFragment : BaseFragment() {
 
     private lateinit var binding: FragmentLoginBinding
     private val viewModel: LoginViewModel by viewModels()
-    private lateinit var dialog: Dialog
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -62,7 +57,7 @@ class LoginFragment : BaseFragment() {
                 }
 
                 is ApiResult.Loading -> {
-                    showLoading(true)
+                    showLoading(true) { viewModel.cancelRequest() }
                 }
 
                 is ApiResult.Error -> {
@@ -71,24 +66,6 @@ class LoginFragment : BaseFragment() {
                 }
             }
         }
-    }
-
-    private fun showLoading(isLoading: Boolean) {
-        if (::dialog.isInitialized.not()) {
-            dialog = Dialog(requireContext(), R.style.Dialog_Loading)
-            val dialogBinding = LayoutLoadingBinding.inflate(layoutInflater)
-            dialog.setContentView(dialogBinding.root)
-            dialog.window?.apply {
-                setLayout(
-                    ConstraintLayout.LayoutParams.MATCH_PARENT,
-                    ConstraintLayout.LayoutParams.MATCH_PARENT,
-                )
-            }
-            dialog.setOnDismissListener {
-                viewModel.cancelRequest()
-            }
-        }
-        if (isLoading) dialog.show() else dialog.hide()
     }
 
     private fun checkCredentials(email: String, password: String): Boolean {

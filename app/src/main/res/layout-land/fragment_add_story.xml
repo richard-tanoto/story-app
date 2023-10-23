@@ -20,23 +20,23 @@
     <include
         android:id="@+id/btnAddImage"
         layout="@layout/button_image_input"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_margin="16dp"
         android:background="@drawable/bg_rounded_dash"
-        app:layout_constraintBottom_toTopOf="@id/imgStory"
-        app:layout_constraintDimensionRatio="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight="match_constraint"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintVertical_bias="0"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imgBorder"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_margin="16dp"
         android:adjustViewBounds="true"
         android:background="@drawable/bg_image_rounded"
         android:contentDescription="Background Image"
@@ -52,28 +52,31 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imgStory"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_margin="16dp"
         android:adjustViewBounds="true"
         android:contentDescription="Story Image"
         android:padding="1dp"
         android:scaleType="fitCenter"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/tfDescription"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnAddImage"
+        app:layout_constraintHeight="match_constraint"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toEndOf="@id/btnAddImage"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:shapeAppearance="@style/Image.Rounded"
         tools:src="@tools:sample/avatars" />
 
     <EditText
         android:id="@+id/tfDescription"
         style="@style/Text.Description"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
+        android:layout_margin="16dp"
         android:background="@drawable/bg_text_field"
         android:gravity="top"
         android:hint="Add description here"
@@ -82,7 +85,9 @@
         android:padding="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imgStory" />
+        app:layout_constraintStart_toEndOf="@id/imgStory"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintWidth="match_constraint" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

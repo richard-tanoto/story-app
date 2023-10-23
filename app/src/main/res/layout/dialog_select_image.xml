@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvHeadline"
+        style="@style/Text.Headline.Six"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="Add photo"
+        app:layout_constraintBottom_toTopOf="@id/btnCamera"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/btnCamera"
+        style="@style/Text.Headline.Six"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/white"
+        android:drawablePadding="16dp"
+        android:gravity="start|center_vertical"
+        android:padding="16dp"
+        android:text="Capture from camera"
+        android:textColor="?attr/colorPrimary"
+        app:drawableStartCompat="@drawable/ic_camera"
+        app:drawableTint="?attr/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@id/btnGallery"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvHeadline" />
+
+    <TextView
+        android:id="@+id/btnGallery"
+        style="@style/Text.Headline.Six"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/white"
+        android:drawablePadding="16dp"
+        android:gravity="start|center_vertical"
+        android:padding="16dp"
+        android:text="Select from gallery"
+        android:textColor="?attr/colorPrimary"
+        app:drawableStartCompat="@drawable/ic_gallery"
+        app:drawableTint="?attr/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@id/divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnCamera" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:dividerColor="?attr/colorOutline"
+        app:layout_constraintBottom_toTopOf="@id/btnDelete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnGallery" />
+
+    <TextView
+        android:id="@+id/btnDelete"
+        style="@style/Text.Headline.Six"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/white"
+        android:drawablePadding="16dp"
+        android:gravity="start|center_vertical"
+        android:padding="16dp"
+        android:text="Remove image"
+        android:textColor="?attr/colorError"
+        app:drawableStartCompat="@drawable/ic_delete"
+        app:drawableTint="?attr/colorError"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnGallery" />
+
+    <!--<TextView
+        android:id="@+id/tv_btn_add_photo_gallery"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:backgroundTint="@android:color/white"
+        android:drawablePadding="32dp"
+        android:drawableStart="@drawable/ic_gallery_photo"
+        android:drawableTint="@color/md_bottom_sheet_text_color"
+        android:gravity="start|center_vertical"
+        android:text="@string/bottom_sheet_option_gallery"
+        android:textColor="@color/md_bottom_sheet_text_color"
+        android:textSize="16sp" />-->
+
+    <!--<View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="@dimen/dp_8"
+        android:layout_marginTop="@dimen/md_bottom_sheet_separator_top_margin"
+        android:background="@color/grayTextColor" />
+
+    <TextView
+        android:id="@+id/tv_btn_remove_photo"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:backgroundTint="@android:color/white"
+        android:drawablePadding="32dp"
+        android:drawableStart="@drawable/ic_delete_photo"
+        android:drawableTint="@color/md_bottom_sheet_text_color"
+        android:gravity="start|center_vertical"
+        android:text="@string/bottom_sheet_option_remove_photo"
+        android:textColor="@color/md_bottom_sheet_text_color"
+        android:textSize="16sp" />-->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
