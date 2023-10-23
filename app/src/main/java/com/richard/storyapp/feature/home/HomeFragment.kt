@@ -54,7 +54,10 @@ class HomeFragment : BaseFragment() {
             setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
                     R.id.destMaps -> findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToMapsFragment())
-                    R.id.destLogin -> viewModel.clearSession()
+                    R.id.destLogin -> {
+                        viewModel.clearSession()
+                        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
+                    }
                 }
                 true
             }

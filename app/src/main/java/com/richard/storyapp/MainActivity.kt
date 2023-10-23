@@ -40,6 +40,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        viewModel.token.removeObservers(this)
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         navController.navigateUp()
         return true
