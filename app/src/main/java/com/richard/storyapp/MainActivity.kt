@@ -1,7 +1,6 @@
 package com.richard.storyapp
 
 import android.os.Bundle
-import android.os.Handler
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen
@@ -36,12 +35,8 @@ class MainActivity : AppCompatActivity() {
             navController.navInflater.inflate(R.navigation.main_navigation).apply {
                 setStartDestination(if (it.isNotEmpty()) R.id.homeFragment else R.id.loginFragment)
                 navController.graph = this
+                splashScreen.setKeepOnScreenCondition { false }
             }
-            Handler(mainLooper).postDelayed(
-                { splashScreen.setKeepOnScreenCondition { false } },
-                300
-            )
-
         }
     }
 
