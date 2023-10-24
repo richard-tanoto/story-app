@@ -15,6 +15,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.net.toUri
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -30,6 +31,7 @@ import com.richard.storyapp.core.util.StoryPermission.CAMERA
 import com.richard.storyapp.databinding.DialogSelectImageBinding
 import com.richard.storyapp.databinding.FragmentAddStoryBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -112,19 +114,22 @@ class AddStoryFragment : BaseFragment() {
 
     private fun uploadStory() {
         viewModel.uri.value?.let { uri ->
-            val imageFile = uriToFile(uri, requireContext())
-            val description =
-                binding.tfDescription.text.toString().toRequestBody("text/plain".toMediaType())
-            val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
-            val image = MultipartBody.Part.createFormData(
-                "photo",
-                imageFile.name,
-                requestImageFile
-            )
-            viewModel.uploadStory(
-                image = image,
-                description = description
-            )
+            showLoading(true) { viewModel.cancelRequest() }
+            lifecycleScope.launch {
+                val imageFile = uriToFile(uri, requireContext())
+                val description =
+                    binding.tfDescription.text.toString().toRequestBody("text/plain".toMediaType())
+                val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
+                val image = MultipartBody.Part.createFormData(
+                    "photo",
+                    imageFile.name,
+                    requestImageFile
+                )
+                viewModel.uploadStory(
+                    image = image,
+                    description = description
+                )
+            }
         }
     }
 

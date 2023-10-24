@@ -6,6 +6,8 @@ import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.net.Uri
 import androidx.exifinterface.media.ExifInterface
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -25,19 +27,19 @@ object ImageUtil {
         return File.createTempFile(timeStamp, ".jpg", filesDir)
     }
 
-    fun uriToFile(imageUri: Uri, context: Context): File {
-        val myFile = createCustomTempFile(context)
+    suspend fun uriToFile(imageUri: Uri, context: Context): File = withContext(Dispatchers.IO) {
+        val file = createCustomTempFile(context)
         val inputStream = context.contentResolver.openInputStream(imageUri) as InputStream
-        val outputStream = FileOutputStream(myFile)
+        val outputStream = FileOutputStream(file)
         val buffer = ByteArray(1024)
         var length: Int
         while (inputStream.read(buffer).also { length = it } > 0) outputStream.write(buffer, 0, length)
         outputStream.close()
         inputStream.close()
-        return myFile.reduceFileImage()
+        return@withContext file.reduceFileImage()
     }
 
-    fun File.reduceFileImage(): File {
+    private fun File.reduceFileImage(): File {
         val file = this
         val bitmap = BitmapFactory.decodeFile(file.path).getRotatedBitmap(file)
         var compressQuality = 100
