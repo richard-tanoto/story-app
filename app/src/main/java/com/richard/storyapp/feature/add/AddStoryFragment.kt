@@ -1,9 +1,15 @@
 package com.richard.storyapp.feature.add
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.ImageDecoder
+import android.location.Location
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -18,8 +24,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.richard.storyapp.BuildConfig
 import com.richard.storyapp.R
 import com.richard.storyapp.core.data.remote.response.ApiResult
 import com.richard.storyapp.core.ui.BaseFragment
@@ -28,6 +36,7 @@ import com.richard.storyapp.core.util.CameraUtil.CAMERA_REQUEST_KEY
 import com.richard.storyapp.core.util.ImageUtil.uriToFile
 import com.richard.storyapp.core.util.InputCheckResult
 import com.richard.storyapp.core.util.StoryPermission.CAMERA
+import com.richard.storyapp.core.util.StoryPermission
 import com.richard.storyapp.databinding.DialogSelectImageBinding
 import com.richard.storyapp.databinding.FragmentAddStoryBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,6 +45,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class AddStoryFragment : BaseFragment() {
@@ -43,13 +53,20 @@ class AddStoryFragment : BaseFragment() {
     private lateinit var binding: FragmentAddStoryBinding
     private val viewModel: AddStoryViewModel by viewModels()
 
+    @Inject
+    lateinit var fusedLocationClient: FusedLocationProviderClient
+
+    private var count = 0
+
+    private var location: Location? = null
+
     private val galleryLauncher = registerForActivityResult(
         ActivityResultContracts.PickVisualMedia()
     ) { uri ->
         uri?.let {
             viewModel.setUri(it)
         } ?: run {
-            showToast("No image selected.")
+            showToast("No image selected")
         }
     }
 
@@ -59,8 +76,37 @@ class AddStoryFragment : BaseFragment() {
         if (isPermitted)
             navigateToCamera()
         else
-            showToast("Please allow the camera permission to use this feature.")
+            showToast("Please allow the camera permission to use this feature")
     }
+
+    private val locationPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            when {
+                isGranted -> getLocation()
+                count == 2 -> {
+                    showToast("Please grant the location permission via device settings")
+                    binding.btnLocation.isChecked = false
+                    Intent(
+                        Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                        Uri.fromParts(
+                            "package",
+                            BuildConfig.APPLICATION_ID,
+                            null
+                        )
+                    ).apply {
+                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        startActivity(this)
+                    }
+                }
+                else -> {
+                    showToast("Please allow the location permission to use this feature")
+                    binding.btnLocation.isChecked = false
+                    count += 1
+                }
+            }
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -125,10 +171,25 @@ class AddStoryFragment : BaseFragment() {
                     imageFile.name,
                     requestImageFile
                 )
-                viewModel.uploadStory(
-                    image = image,
-                    description = description
-                )
+                if (binding.btnLocation.isChecked) {
+                    location?.let {
+                        val lat = it.latitude.toString().toRequestBody("text/plain".toMediaType())
+                        val lon = it.longitude.toString().toRequestBody("text/plain".toMediaType())
+                        viewModel.uploadStory(
+                            image = image,
+                            description = description,
+                            lat = lat,
+                            lon = lon,
+                        )
+                    } ?: run {
+                        showToast("Cannot obtain your location")
+                    }
+                } else {
+                    viewModel.uploadStory(
+                        image = image,
+                        description = description
+                    )
+                }
             }
         }
     }
@@ -139,6 +200,24 @@ class AddStoryFragment : BaseFragment() {
         }
         binding.imgStory.setOnClickListener {
             showDialog(true)
+        }
+        binding.btnLocation.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) getLocation()
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun getLocation() {
+        if (permissionGranted(StoryPermission.LOCATION_PRECISE) && permissionGranted(StoryPermission.LOCATION_APPROXIMATE)) {
+            fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+                location?.let {
+                    this.location = location
+                } ?: run {
+                    binding.btnLocation.isChecked = false
+                }
+            }
+        } else {
+            locationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }
     }
 
@@ -218,7 +297,7 @@ class AddStoryFragment : BaseFragment() {
             result?.let {
                 viewModel.setUri(it)
             } ?: run {
-                showToast("No image captured.")
+                showToast("No image captured")
             }
         }
         findNavController().navigate(AddStoryFragmentDirections.actionAddStoryFragmentToCameraFragment())

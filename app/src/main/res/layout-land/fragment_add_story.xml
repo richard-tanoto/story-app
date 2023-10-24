@@ -90,4 +90,26 @@
         app:layout_constraintVertical_bias="0"
         app:layout_constraintWidth="match_constraint" />
 
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/btnLocation"
+        style="@style/Text.Description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintStart_toEndOf="@id/imgStory"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tfDescription"
+        app:switchPadding="12dp" />
+
+    <TextView
+        style="@style/Text.Description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="Share my location"
+        app:layout_constraintBottom_toBottomOf="@id/btnLocation"
+        app:layout_constraintStart_toEndOf="@id/btnLocation"
+        app:layout_constraintTop_toTopOf="@id/btnLocation"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
