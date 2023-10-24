@@ -11,6 +11,7 @@ import com.richard.storyapp.core.data.local.room.StoryDatabase
 import com.richard.storyapp.core.data.remote.api.ApiService
 import com.richard.storyapp.core.data.remote.response.AddStoryResponse
 import com.richard.storyapp.core.data.remote.response.ApiResult
+import com.richard.storyapp.core.data.remote.response.GetStoriesResponse
 import com.richard.storyapp.core.data.remote.response.StoryDetailResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -45,10 +46,21 @@ class StoryRepository @Inject constructor(
     @OptIn(ExperimentalPagingApi::class)
     fun getStories(): LiveData<PagingData<Story>> {
         return Pager(
-            config = PagingConfig(pageSize = 5),
+            config = PagingConfig(pageSize = 10),
             remoteMediator = storyRemoteMediator,
             pagingSourceFactory = { storyDatabase.storyDao().getStories() }
         ).liveData
+    }
+
+    fun getStoriesWithLocation(): Flow<ApiResult<GetStoriesResponse>> = flow {
+        try {
+            val response = apiService.getStories(location = 1)
+            emit(ApiResult.Success(response))
+        } catch (e: Exception) {
+            emit(ApiResult.Error(e.message))
+        }
+    }.onStart {
+        emit(ApiResult.Loading())
     }
 
     fun getStory(id: String): Flow<ApiResult<StoryDetailResponse>> = flow {

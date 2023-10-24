@@ -67,6 +67,10 @@ dependencyResolutionManagement {
             library("camerax", "androidx.camera:camera-camera2:1.3.0")
             library("camerax-lifecycle", "androidx.camera:camera-lifecycle:1.3.0")
             library("camerax-view", "androidx.camera:camera-view:1.3.0")
+
+            // Google Maps
+            library("gms-maps", "com.google.android.gms:play-services-maps:18.1.0")
+            library("gms-location", "com.google.android.gms:play-services-location:21.0.1")
         }
     }
 }

@@ -4,6 +4,7 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.dagger.hilt.android")
     id("com.google.devtools.ksp")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
@@ -85,4 +86,8 @@ dependencies {
     implementation(libs.camerax)
     implementation(libs.camerax.lifecycle)
     implementation(libs.camerax.view)
+
+    implementation(libs.gms.maps)
+    implementation(libs.gms.location)
+
 }

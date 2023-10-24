@@ -67,5 +67,9 @@
     <fragment
         android:id="@+id/mapsFragment"
         android:name="com.richard.storyapp.feature.maps.MapsFragment"
-        android:label="MapsFragment" />
+        android:label="MapsFragment" >
+        <action
+            android:id="@+id/action_mapsFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
 </navigation>
