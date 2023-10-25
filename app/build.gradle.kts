@@ -41,6 +41,10 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+    @Suppress("UnstableApiUsage")
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -89,5 +93,10 @@ dependencies {
 
     implementation(libs.gms.maps)
     implementation(libs.gms.location)
+
+    testImplementation("androidx.arch.core:core-testing:2.2.0") // InstantTaskExecutorRule
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1") //TestDispatcher
+    testImplementation("org.mockito:mockito-core:5.3.1")
+    testImplementation("org.mockito:mockito-inline:3.12.4")
 
 }
